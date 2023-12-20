@@ -8,11 +8,12 @@ namespace FimesApi.Net6.Controllers;
 public class FilmeController : ControllerBase
 {
     private static List<Filme> filmes = new List<Filme>();
+    private static int id = 0;
 
     [HttpPost]
     public void AdicionaFilme([FromBody] Filme filme)
     {
-
+        filme.Id = id++;
         filmes.Add(filme);
 
         Console.WriteLine(filme.Titulo);
@@ -23,5 +24,11 @@ public class FilmeController : ControllerBase
     public IEnumerable<Filme> RecuperaFilme()
     {
         return filmes;
+    }
+
+    [HttpGet("{id}")]
+    public Filme? RecuperaFilmeId(int id)
+    {
+        return filmes.FirstOrDefault(filme => filme.Id == id);         
     }
 }
