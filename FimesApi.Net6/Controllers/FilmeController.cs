@@ -2,6 +2,7 @@
 using FimesApi.Net6.Data;
 using FimesApi.Net6.Data.Dtos;
 using FimesApi.Net6.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FimesApi.Net6.Controllers;
@@ -56,6 +57,28 @@ public class FilmeController : ControllerBase
             return NotFound();
         }
         _mapper.Map(filmeDto, filme);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpPatch("{id}")]
+    public IActionResult AtualizaFilmeParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
+    {
+        var filme = _context.Filmes.FirstOrDefault(
+            filme => filme.Id == id);
+        if (filme == null)
+        {
+            return NotFound();
+        }
+
+        var filmeUpdate = _mapper.Map<UpdateFilmeDto>(filme);
+        patch.ApplyTo(filmeUpdate, ModelState);
+        if (!TryValidateModel(filmeUpdate))
+        {
+            return ValidationProblem(ModelState);
+        }
+        _mapper.Map(filmeUpdate, filme);
         _context.SaveChanges();
 
         return NoContent();
