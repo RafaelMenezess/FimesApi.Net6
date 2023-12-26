@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FimesApi.Net6", "FimesApi.Net6\FimesApi.Net6.csproj", "{365637F6-1E07-4591-8547-92313C76F3EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FimesApi.Net6", "FimesApi.Net6\FimesApi.Net6.csproj", "{365637F6-1E07-4591-8547-92313C76F3EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
